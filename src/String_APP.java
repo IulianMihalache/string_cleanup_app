@@ -2,7 +2,29 @@ import java.io.*;
 
 public class String_APP{
     public FileReader f = null;
-    public void main() throws IOException{
+
+    public String removeMultipleSpaces(StringBuilder text) {
+        StringBuilder result = new StringBuilder();
+        boolean last_space = false;
+
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+
+            if (c == ' ') {
+                if (!last_space) {
+                    result.append(c);
+                    last_space = true;
+                }
+            } else {
+                result.append(c);
+                last_space = false;
+            }
+        }
+
+        return result.toString();
+    }
+
+    public void main(String[] args) throws IOException{
         StringBuilder buffer = new StringBuilder();
         int c;
         try{
@@ -15,6 +37,8 @@ public class String_APP{
         catch(FileNotFoundException e){
             System.out.println("File not found.");
         }
+
         System.out.println(buffer);
+        System.out.println(removeMultipleSpaces(buffer));
     }
 }
